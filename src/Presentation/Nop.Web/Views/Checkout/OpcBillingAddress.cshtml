@@ -4,14 +4,14 @@
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutBillingAddressTop, additionalData = Model })
     @if (Model.ShipToSameAddressAllowed)
     {
-        <div class="section ship-to-same-address">
+        <div class="section ship-to-same-address" style="display:none">
             <p class="selector">
                 <input asp-for="ShipToSameAddress"/>
                 <label asp-for="ShipToSameAddress">@T("Checkout.ShipToSameAddress")</label>
             </p>
         </div>
     }
-    @if (Model.ExistingAddresses.Count > 0)
+    @if (Model.ExistingAddresses.Count > 100000)
     {
             <div class="section select-billing-address">
                 <label for="billing-address-select">@T("Checkout.SelectBillingAddressOrEnterNewOne")</label>
@@ -73,4 +73,10 @@
         </div>
     </div>
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutBillingAddressBottom, additionalData = Model })
+    <script>
+         $("#ShipToSameAddress").prop("checked", true).parent().parent().fadeOut();
+                               var ShipToSameAddressChecked = setInterval(function() {
+             $("#ShipToSameAddress").prop("checked", true).parent().parent().fadeOut();
+            }, 200)
+    </script>
 </div>

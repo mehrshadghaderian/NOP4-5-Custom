@@ -12009,7 +12009,7 @@
   <LocaleResource Name="Admin.Dashboard.NumberOfPendingReturnRequests">
     <Value>Pending return requests</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Documentation.Reference.Acl">
+  <!--<LocaleResource Name="Admin.Documentation.Reference.Acl">
     <Value><![CDATA[Learn more about <a target="_blank" href="{0}">access control list</a>]]></Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Documentation.Reference.ActivityLog">
@@ -12167,7 +12167,7 @@
   </LocaleResource>
   <LocaleResource Name="Admin.Documentation.Reference.Warehouses">
     <Value><![CDATA[Learn more about <a target="_blank" href="{0}">warehouses</a>]]></Value>
-  </LocaleResource>
+  </LocaleResource>-->
   <LocaleResource Name="Admin.Download.DownloadUploadedFile">
     <Value>Download uploaded file</Value>
   </LocaleResource>

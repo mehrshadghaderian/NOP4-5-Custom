@@ -24,8 +24,7 @@
     <section class="content">
     <div class="container-fluid">
         <div class="card card-default">
-            <div class="card-body">
-                <nop-doc-reference asp-string-resource="@T("Admin.Documentation.Reference.ActivityLog", Docs.ActivityLog + Utm.OnAdmin)" />
+            <div class="card-body"> 
 
                 @await Html.PartialAsync("Table", new DataTablesModel
                 {

@@ -1,6 +1,6 @@
-﻿@model AddressModel
+﻿﻿@model AddressModel
 
-<input class="address-id" asp-for="Id" type="hidden"/>
+<input class="address-id" asp-for="Id" type="hidden" />
 <div class="edit-address">
     <div class="inputs">
         <label asp-for="FirstName" asp-postfix=":"></label>
@@ -16,7 +16,7 @@
     </div>
     <div class="inputs">
         <label asp-for="Email" asp-postfix=":"></label>
-        <input asp-for="Email" />
+        <input asp-for="Email" value="test@gmail.com" />
         <nop-required />
         <span asp-validation-for="Email"></span>
     </div>
@@ -37,10 +37,10 @@
         <div class="inputs" style="display:none">
             <label asp-for="CountryId" asp-postfix=":"></label>
             <select asp-for="CountryId" asp-items="Model.AvailableCountries"
-                    data-trigger="country-select"
-                    data-url="@(Url.RouteUrl("GetStatesByCountryId"))"
-                    data-stateprovince="#@Html.IdFor(model => model.StateProvinceId)"
-                    data-loading="#states-loading-progress"></select>
+                data-trigger="country-select"
+                data-url="@(Url.RouteUrl("GetStatesByCountryId"))"
+                data-stateprovince="#@Html.IdFor(model => model.StateProvinceId)"
+                data-loading="#states-loading-progress"></select>
             <nop-required />
             <span asp-validation-for="CountryId"></span>
         </div>
@@ -51,7 +51,7 @@
         <div class="inputs">
             <label asp-for="StateProvinceId" asp-postfix=":"></label>
             <select asp-for="StateProvinceId" asp-items="Model.AvailableStates"
-                    data-trigger="state-select">
+                data-trigger="state-select">
             </select>
             <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait")</span>
             <span asp-validation-for="StateProvinceId"></span>
@@ -109,7 +109,7 @@
     {
         <div class="inputs">
             <label asp-for="ZipPostalCode" asp-postfix=":"></label>
-            <input asp-for="ZipPostalCode" />
+            <input asp-for="ZipPostalCode" value="111111111" />
             @if (Model.ZipPostalCodeRequired)
             {
                 <nop-required />
@@ -145,11 +145,53 @@
     {
         @await Html.PartialAsync("_AddressAttributes", Model.CustomAddressAttributes)
     }
-    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.AddressBottom, additionalData = Model })
 </div>
 <script>
-$(window).load(function() {
-  $("#ShippingNewAddress_Id").parent().find("option:first").remove()
-    $('select[data-trigger="country-select"]').change();
-})
+    try {
+        var fillProvince1 = setInterval(function() {
+             $("#ShipToSameAddress").prop("checked", true).parent().parent().hide();
+            $("#ShippingNewAddress_CountryId").parent().find("option[value='0']").remove();
+            $("#ShippingNewAddress_CountryId option[value='0']").remove();
+            $("#BillingNewAddress_CountryId").parent().find("option[value='0']").remove();
+            $("#BillingNewAddress_CountryId option[value='0']").remove();
+            if ($("#BillingNewAddress_StateProvinceId option").length == 1) {
+                $('select[data-trigger="country-select"]').change();
+            }
+            if ($("#ShippingNewAddress_StateProvinceId option").length == 1) {
+                $('select[data-trigger="country-select"]').change();
+            }
+            else {
+                clearInterval(fillProvince1);
+            }
+
+        }, 2000)
+        $("#ShipToSameAddress").prop("checked", true);
+        var ShipToSameAddressChecked = setInterval(function() {
+             $("#ShipToSameAddress").prop("checked", true).parent().parent().hide();
+     
+        }, 2000)
+    }
+    catch (ex) {
+        var fillProvince2 = setInterval(function() {
+              $("#ShipToSameAddress").prop("checked", true).parent().parent().hide();
+            $("#ShippingNewAddress_CountryId").parent().find("option[value='0']").remove();
+            $("#ShippingNewAddress_CountryId option[value='0']").remove();
+            $("#BillingNewAddress_CountryId").parent().find("option[value='0']").remove();
+            $("#BillingNewAddress_CountryId option[value='0']").remove();
+            if ($("#BillingNewAddress_StateProvinceId option").length == 1) {
+                $('select[data-trigger="country-select"]').change();
+            }
+            if ($("#ShippingNewAddress_StateProvinceId option").length == 1) {
+                $('select[data-trigger="country-select"]').change();
+            }
+            else {
+                clearInterval(fillProvince2);
+            }
+
+        }, 3000)
+
+
+    }
+
+
 </script>

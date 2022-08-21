@@ -40,14 +40,14 @@
                     }
 
                     @await Component.InvokeAsync("AdminWidget", new { widgetZone = AdminWidgetZones.DashboardTop, additionalData = Model })
-                    @if (!Model.IsLoggedInAsVendor)
+@*                    @if (!Model.IsLoggedInAsVendor)
                     {
                         <div class="row">
                             <div class="col-md-12">
                                 @await Component.InvokeAsync("NopCommerceNews")
                             </div>
                         </div>
-                    }
+                    }*@
 
                     @await Component.InvokeAsync("AdminWidget", new { widgetZone = AdminWidgetZones.DashboardNewsAfter, additionalData = Model })
                     @if (!Model.IsLoggedInAsVendor && canManageOrders && canManageCustomers && canManageProducts && canManageReturnRequests)
